@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""nested functions for calc multiplier"""
 from typing import Callable
 
 
