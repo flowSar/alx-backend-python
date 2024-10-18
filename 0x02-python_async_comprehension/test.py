@@ -2,15 +2,24 @@
 import random
 import asyncio
 from typing import List
+import time
 
-async_generator = __import__('0-async_generator').async_generator
+async_comprehension = __import__('1-async_comprehension').async_comprehension
 
-async def async_comprehension() -> List[float]:
-    result = []
-    async for i in async_generator():
-        result.append(i)
+async def measure_runtime():
+    start_time = time.time()
+    await asyncio.gather(async_comprehension(),
+                   async_comprehension(),
+                   async_comprehension(),
+                   async_comprehension())
+    
+    end_time = time.time()
+    result = end_time - start_time
+    return result
 
 async def main():
-    print(await async_comprehension())
+    return await(measure_runtime())
 
-asyncio.run(main())
+print(
+    asyncio.run(main())
+)
