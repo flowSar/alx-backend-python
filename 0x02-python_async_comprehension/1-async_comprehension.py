@@ -9,3 +9,4 @@ async def async_comprehension() -> List[float]:
     result = []
     async for i in async_generator():
         result.append(i)
+    return result
