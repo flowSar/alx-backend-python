@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
-"""get the list of deplay in ascend order"""
-import random
+"""measures the total execution time"""
+import time
 import asyncio
-from typing import List
+import time
+wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
-wait_random = __import__('0-basic_async_syntax').wait_random
+def measure_time(n: int, max_delay: int) -> float:
+    """measures the total execution time"""
+    start_time = time.time()
+    asyncio.run(wait_n(n, max_delay))
+    end_time = time.time()
+    total_time = end_time - start_time
+    return total_time/n
 
+n = 5
+max_delay = 9
 
-async def wait_n(n: int, max_delay: int) -> List[float]:
-    """get the list of deplay in ascend order"""
-    delays: List[float] = []
-    tasks: List = []
-
-    for _ in range(n):
-        tasks.append(wait_random(max_delay))
-
-    for task in asyncio.as_completed((tasks)):
-        delays.append(await task)
-
-    return delays
+print(measure_time(n, max_delay))
 
 
 
