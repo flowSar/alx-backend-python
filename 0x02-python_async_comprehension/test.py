@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 import random
 import asyncio
+from typing import List
 
-async def async_generator() -> float:
-    numbers = []
-    for _ in range(9):
-        await asyncio.sleep(1)
-        yield random.uniform(0, 10)
+async_generator = __import__('0-async_generator').async_generator
 
-
-async def print_yielded_values():
+async def async_comprehension() -> List[float]:
     result = []
     async for i in async_generator():
         result.append(i)
-    print(result)
 
-asyncio.run(print_yielded_values())
+async def main():
+    print(await async_comprehension())
+
+asyncio.run(main())
