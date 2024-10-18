@@ -10,4 +10,3 @@ async def wait_n(n, max_delay):
         delay = delays.append(await wait_random(max_delay))
         heapq.heappush(delays, delay)
     return delays
-
